@@ -1,0 +1,111 @@
+
+
+{% extends "layout-frontend.html" %}
+
+{% load static %}
+
+{% block logo %}
+    <a href="/home">
+    <img src="{% static 'product/resources/img/logo.png' %}" alt="OnTrend Clothing logo" class="logo">
+    </a>
+    <a href="/home">
+    <img src="{% static 'product/resources/img/logo-green.png' %}" alt="OnTrend Clothing logo" class="logo-green">
+    </a>
+{% endblock logo %}
+
+
+{% block header%} class="header" {% endblock header%}
+    {% block navelements%}
+    <li><a href="/searchproduct"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg></a></li>
+    {% block custdetails %}
+    <li><a href="/addcust"></i>Signup</a></li>
+    
+    <li><a href="/custLogin"></i>Login</a></li>
+    {% endblock custdetails %}
+    {% endblock navelements%}
+
+    {% block banner  %}
+
+    <div class="hero-text-box">
+        {% for banner in banner %}
+        <h1>{{banner.herotitle}}<br>{{banner.herosubtitle}}</h1>
+        <a class="btn btn-full js--scroll-to-plans" href="/allproducts">{{banner.herobtntitle}}</a>
+        <a class="btn btn-ghost js--scroll-to-start" href="#reviews">{{banner.ghostbtntitle}}</a>
+        {% endfor %}
+    </div>
+
+    {% endblock banner %}
+
+{{banner.mainbanner }}
+{% block mainbanner %}
+        <section class="main-banner">
+            <div class="row">
+                {% for banner in banner %}
+                <div class="col span-12-of-12">
+                    <img src="{% static '/media/' %}{{banner.mainbanner }}">
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endblock mainbanner %}
+{% block content %}
+    <section class="section-products js--section-products">
+            <div class="row">
+                {% for banner in banner%}
+                <h2>{{banner.featureprodtitle}}</h2>
+                {% endfor %}
+            </div>
+            
+            <div class="row js--wp-3">
+
+                {% for trendyproduct in trendyproducts %}
+                
+                <a href="/productdetails/{{trendyproduct.SKU}}">
+                    <div class="span-1-of-4 allproducts">
+                        <img src="{% static '/media/' %}{{trendyproduct.displayImgFirst}}">
+                        
+                        <h3>{{trendyproduct.title}}</h3>
+                        <h3><i class="ion-social-usd"></i>
+                        {{trendyproduct.price}} Dollars
+                        </h3>
+                    </div>
+                </a>
+                {% endfor %}
+               
+            </div>
+            
+        </section>
+        
+        <section class="section-testimonials" id="reviews">
+            <div class="row">
+                {% for banner in banner %}
+                <h2>{{banner.reviewsectiontitle}}</h2>
+                {% endfor %}
+            </div>
+            <div class="row">
+                {% for review in reviews %}
+                <div class="col span-1-of-3">
+                    <blockquote>
+                        {{review.review}}
+                        <cite><img src="{% static '/media/' %}{{review.img}}">{{review.name}}</cite>
+                    </blockquote>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+{% endblock %}
+
+{% block reviewbanner %}
+        <section class="review-banner">
+            <div class="row">
+                {% for banner in banner %}
+                <div class="col span-6-of-12">
+                    <img src="{% static '/media/' %}{{banner.menbanner }}">
+                </div>
+                <div class="col span-6-of-12">
+                    <img src="{% static '/media/' %}{{banner.womenbanner }}">
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+{% endblock reviewbanner %}
